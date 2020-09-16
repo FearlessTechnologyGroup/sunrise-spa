@@ -3,6 +3,10 @@ fragment CartFields on Cart {
   version
   lineItems {
     id
+    customFieldsRaw {
+      name
+      value
+    }
     name(locale: $locale)
     productSlug(locale: $locale)
     quantity

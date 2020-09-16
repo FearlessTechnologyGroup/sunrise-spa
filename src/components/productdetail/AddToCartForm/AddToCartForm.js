@@ -39,6 +39,16 @@ export default {
         addLineItem: {
           sku: this.sku,
           quantity: Number(this.quantity),
+          custom: {
+            type: {
+              key: 'line-item-addedFrom',
+              typeId: 'type',
+            },
+            fields: {
+              name: 'addedFrom',
+              value: `{\"en\": \"PDP\"}`, //eslint-disable-line
+            },
+          },
         },
       }).then(() => this.$store.dispatch('openMiniCart'));
     },

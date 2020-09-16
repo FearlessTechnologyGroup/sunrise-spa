@@ -26,6 +26,16 @@ export default {
         addLineItem: {
           sku,
           quantity: 1,
+          custom: {
+            type: {
+              key: 'line-item-addedFrom',
+              typeId: 'type',
+            },
+            fields: {
+              name: 'addedFrom',
+              value: `{\"en\": \"Thumbnail\"}`, //eslint-disable-line
+            },
+          },
         },
       }).then(() => this.$store.dispatch('openMiniCart'));
     },

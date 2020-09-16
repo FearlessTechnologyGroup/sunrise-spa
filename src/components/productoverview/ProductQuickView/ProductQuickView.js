@@ -45,6 +45,16 @@ export default {
         addLineItem: {
           sku: this.productSku,
           quantity: Number(this.quantity),
+          custom: {
+            type: {
+              key: 'line-item-addedFrom',
+              typeId: 'type',
+            },
+            fields: {
+              name: 'addedFrom',
+              value: `{\"en\": \"QuickView\"}`, //eslint-disable-line
+            },
+          },
         },
       }).then(() => { this.closeModal(); this.$store.dispatch('openMiniCart'); });
     },
