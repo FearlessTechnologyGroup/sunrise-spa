@@ -24,6 +24,7 @@ export default {
     showModal() {
       if (this.showModal === true) {
         this.$modal.show('quickView');
+        this.featureUsed();
       }
     },
   },
@@ -47,6 +48,24 @@ export default {
           quantity: Number(this.quantity),
         },
       }).then(() => { this.closeModal(); this.$store.dispatch('openMiniCart'); });
+    },
+    async featureUsed() {
+      if (!this.cartExists) {
+        await this.createMyCart({
+          currency: this.$store.state.currency,
+          country: this.$store.state.country,
+          shippingAddress: { country: this.$store.state.country },
+        });
+      }
+      return this.updateMyCart({
+        setCustomType: {
+          type: { key: 'features-used', typeId: 'type' },
+          fields: {
+            name: 'features',
+            value: `[{ \"typeId\": \"key-value-document\",  \"id\": \"0b04e62f-65a1-4daf-80e5-42aedccb4175\"}]`, //eslint-disable-line
+          },
+        },
+      });
     },
   },
   computed: {
