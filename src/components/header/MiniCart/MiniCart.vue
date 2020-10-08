@@ -90,12 +90,12 @@
             <h5>{{ $t('emptyCart') }}</h5>
           </span>
 
-          <div v-if="featuresUsedNames.length > 0">
+          <div v-if="featuresUsed.length > 0">
             <hr />
             <h4>Features Used</h4>
             <ol>
               <li
-                v-for="feature in featuresUsedNames"
+                v-for="feature in featuresUsed"
                 :key="feature.id"
               >
                 <div>

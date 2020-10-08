@@ -5,7 +5,7 @@ import MONEY_FRAGMENT from '../components/Money.gql';
 import ADDRESS_FRAGMENT from '../components/Address.gql';
 import { locale } from '../components/common/shared';
 
-const getFeaturesUsed = (features, featuresUsedIds, featureToAdd) => {
+const getFeaturesUsedUpdate = (features, featuresUsedIds, featureToAdd) => {
   // find featureToAdd in our list of features
   if (Array.isArray(features)) {
     const featureId = features.reduce((acc, feature) => {
@@ -21,7 +21,8 @@ const getFeaturesUsed = (features, featuresUsedIds, featureToAdd) => {
       return `[${featuresFormatted.join(',')}]`;
     }
   }
-  return null;
+
+  return null; // no need to update the cart
 };
 
 export default {
@@ -40,7 +41,8 @@ export default {
       if (this.cartExists) {
         const { customFieldsRaw = [] } = this.me?.activeCart || {};
         if (Array.isArray(customFieldsRaw)) {
-          const features = customFieldsRaw.find((cf) => cf.name === 'features');
+          const features = customFieldsRaw
+            .find((cf) => cf.name === 'features');
           const { value: featuresUsed = [] } = features || {};
           return featuresUsed.reduce((acc, v) => acc.concat(v.id), []);
         }
@@ -48,7 +50,7 @@ export default {
       return [];
     },
 
-    featuresUsedNames() {
+    featuresUsed() {
       if (this.featuresUsedIds && this.features) {
         return this.features.reduce((acc, feature) => {
           const { id, value } = feature || {};
@@ -65,16 +67,15 @@ export default {
 
   methods: {
     async updateFeaturesUsed(featureToAdd) {
-      if (!this.cartExists) {
-        await this.createMyCart({
-          currency: this.$store.state.currency,
-          country: this.$store.state.country,
-          shippingAddress: { country: this.$store.state.country },
-        });
-      }
+      // check to see if we've already set this feature and
+      // if not, get a string we can use for the update
+      const featuresUsed = getFeaturesUsedUpdate(
+        this.features,
+        this.featuresUsedIds,
+        featureToAdd,
+      );
 
-      const featuresUsed = getFeaturesUsed(this.features, this.featuresUsedIds, featureToAdd);
-      if (featuresUsed) {
+      if (this.cartExists && featuresUsed) {
         return this.updateMyCart({
           setCustomType: {
             type: { key: 'features-used', typeId: 'type' },
@@ -85,6 +86,8 @@ export default {
           },
         });
       }
+
+      // if we don't have a cart yet or the feature is already set, just resolve the promise
       return Promise.resolve();
     },
   },
