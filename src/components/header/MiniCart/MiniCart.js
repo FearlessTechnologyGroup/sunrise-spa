@@ -2,6 +2,7 @@ import Vue from 'vue';
 import gql from 'graphql-tag';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import cartMixin from '../../../mixins/cartMixin';
+import featuresMixin from '../../../mixins/featuresMixin';
 import productMixin from '../../../mixins/productMixin';
 import BasePrice from '../../common/BasePrice/MiniCardBasePrice.vue';
 import LineItemInfo from '../../common/cartlike/LineItemInfo/LineItemInfo.vue';
@@ -20,7 +21,7 @@ export default {
     VuePerfectScrollbar,
     BasePrice,
   },
-  mixins: [cartMixin, productMixin],
+  mixins: [cartMixin, productMixin, featuresMixin],
   data: () => ({
     me: null,
   }),

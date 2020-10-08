@@ -3,6 +3,7 @@ import LoginButton from '../LoginButton/LoginButton.vue';
 import LocationSelector from '../LocationSelector/LocationSelector.vue';
 import MiniCart from '../MiniCart/MiniCart.vue';
 import cartMixin from '../../../mixins/cartMixin';
+import featuresMixin from '../../../mixins/featuresMixin';
 
 export default {
   components: {
@@ -18,7 +19,7 @@ export default {
       searchOpen: false,
     };
   },
-  mixins: [cartMixin],
+  mixins: [cartMixin, featuresMixin],
   computed: {
     totalCartItems() {
       return this.$store.state.cartItems;
@@ -27,6 +28,9 @@ export default {
   methods: {
     toggleSearch() {
       this.searchOpen = !this.searchOpen;
+      if (this.searchOpen) {
+        this.updateFeaturesUsed('header-keyword-search');
+      }
     },
     search() {
       this.toggleSearch();

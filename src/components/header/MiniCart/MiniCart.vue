@@ -89,6 +89,24 @@
           <span v-if="!cartNotEmpty">
             <h5>{{ $t('emptyCart') }}</h5>
           </span>
+
+          <div v-if="featuresUsedNames.length > 0">
+            <hr />
+            <h4>Features Used</h4>
+            <ol>
+              <li
+                v-for="feature in featuresUsedNames"
+                :key="feature.id"
+              >
+                <div>
+                  <span><strong>{{ feature.name }}</strong></span>
+                  <br />
+                  <span>{{ feature.description }}</span>
+                </div>
+              </li>
+            </ol>
+          </div>
+
         </div>
       </div>
     </div>

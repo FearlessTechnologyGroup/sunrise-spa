@@ -5,9 +5,10 @@ import ProductGallery from '../../productdetail/ProductGallery/ProductGallery.vu
 import { locale, getValue } from '../../common/shared';
 import config from '../../../../sunrise.config';
 import cartMixin from '../../../mixins/cartMixin';
+import featuresMixin from '../../../mixins/featuresMixin';
 
 export default {
-  mixins: [productMixin, cartMixin],
+  mixins: [productMixin, cartMixin, featuresMixin],
   data: () => ({
     product: null,
     quantity: 1,
@@ -24,7 +25,7 @@ export default {
     showModal() {
       if (this.showModal === true) {
         this.$modal.show('quickView');
-        this.featureUsed();
+        this.updateFeaturesUsed('quick-shop');
       }
     },
   },
@@ -48,24 +49,6 @@ export default {
           quantity: Number(this.quantity),
         },
       }).then(() => { this.closeModal(); this.$store.dispatch('openMiniCart'); });
-    },
-    async featureUsed() {
-      if (!this.cartExists) {
-        await this.createMyCart({
-          currency: this.$store.state.currency,
-          country: this.$store.state.country,
-          shippingAddress: { country: this.$store.state.country },
-        });
-      }
-      return this.updateMyCart({
-        setCustomType: {
-          type: { key: 'features-used', typeId: 'type' },
-          fields: {
-            name: 'features',
-            value: `[{ \"typeId\": \"key-value-document\",  \"id\": \"0b04e62f-65a1-4daf-80e5-42aedccb4175\"}]`, //eslint-disable-line
-          },
-        },
-      });
     },
   },
   computed: {
