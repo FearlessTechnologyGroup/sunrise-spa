@@ -26,6 +26,7 @@ _vscode
 *.njsproj
 *.sln
 *.sw*
+.history
 
 /sunrise.iml
 /graphql.config.json
