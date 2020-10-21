@@ -84,6 +84,7 @@ module.exports = {
       'x-invalid-end-tag': true,
       'x-invalid-namespace': true,
     }],
+    'linebreak-style': 'off',
   },
 
   parserOptions: {
