@@ -33,7 +33,7 @@
         <span
           data-test="cart-line-item-sku"
         >
-          {{ lineItem.customFieldsRaw && `Added from ${lineItem.customFieldsRaw[0].value.en}` }}
+          {{ addedFrom }}
         </span>
       </td>
       <td class="product-price">

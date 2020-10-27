@@ -52,7 +52,7 @@ export default {
             },
             fields: {
               name: 'addedFrom',
-              value: `{\"en\": \"QuickView\"}`, //eslint-disable-line
+              value: `{\"en\": \"QuickView\", \"de\": \"Kurzer Blick\"}`, //eslint-disable-line
             },
           },
         },

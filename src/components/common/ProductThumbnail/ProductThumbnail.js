@@ -33,7 +33,7 @@ export default {
             },
             fields: {
               name: 'addedFrom',
-              value: `{\"en\": \"Thumbnail\"}`, //eslint-disable-line
+              value: `{\"en\": \"Thumbnail\", \"de\": \"Vorschaubild\"}`, //eslint-disable-line
             },
           },
         },

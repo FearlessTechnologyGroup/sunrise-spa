@@ -36,6 +36,13 @@ export default {
         ({ name, value }) => `${name}: ${value}`,
       ).join(', ')}`;
     },
+    addedFrom() {
+      if (this.lineItem.customFieldsRaw) {
+        const addedFromLocalized = this.lineItem.customFieldsRaw[0].value[locale(this)];
+        return `Added from ${addedFromLocalized}`;
+      }
+      return null;
+    },
   },
   mixins: [productMixin],
 };

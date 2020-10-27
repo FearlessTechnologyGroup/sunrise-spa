@@ -46,7 +46,7 @@ export default {
             },
             fields: {
               name: 'addedFrom',
-              value: `{\"en\": \"PDP\"}`, //eslint-disable-line
+              value: `{\"en\": \"PDP\", \"de\": \"Produkt-Detailseite\"}`, //eslint-disable-line
             },
           },
         },
